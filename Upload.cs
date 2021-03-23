@@ -13,12 +13,13 @@ namespace dan.upload
             FunctionContext executionContext)
         {
             var logger = executionContext.GetLogger("Upload");
-            logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
             var message = new System.IO.StreamReader(req.Body).ReadToEnd().Trim('"');
+
+            logger.LogInformation($"Called with {message}");
 
             response.WriteString("Welcome to Azure " + message);
 
