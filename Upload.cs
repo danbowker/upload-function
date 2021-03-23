@@ -18,7 +18,9 @@ namespace dan.upload
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
-            response.WriteString("Welcome to Azure Functions! " + req.Body);
+            var message = new System.IO.StreamReader(req.Body).ReadToEnd().Trim('"');
+
+            response.WriteString("Welcome to Azure " + message);
 
             return response;
         }
